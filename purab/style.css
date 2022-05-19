@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+}
+
+.clear-cart{
+    background-color: red !important;
+    margin-left: 40px ;
+    margin-top: 10px;
+    border: none;
+}
+
+.add-cart{
+    background-color: blue !important;
+    margin-left: 40px;
+    margin-top: 10px;
+    border: none;
+}
+
+.total-price{
+    margin-left:30px ;
+}

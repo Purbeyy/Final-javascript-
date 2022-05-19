@@ -1,0 +1,86 @@
+
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS</title>
+    </head>
+    <body>
+              
+      
+    
+        <table class="table table-striped table-dark" border="1">
+            <tr>
+                <th>id</th>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Cost</th>
+                <th>Buy</th>
+                
+                
+            </tr>
+            
+                <tr>
+                    <td>1</td>
+                    <td><img src="images/tv.jpg" height= "200px" width="350px"></td>
+                    <td>TV</td>
+                    <td class="price">60000</td>
+                    <td> <a href="#"  data-name= "TV" data-price= 60000 class="add-to-cart data btn btn-primary">Add to cart</a></td>
+                    
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td><img src="images/keyboard.jpg" height= "200px" width="350px"></td>
+                    <td>Keyboard</td>
+                    <td class="price">3000</td>
+                    <td> <a href="#"  data-name= "Keyboard" data-price= 3000 class="add-to-cart data btn btn-primary">Add to cart</a></td>
+                </tr>
+    
+            
+    
+          
+            
+            <div class="show-table">
+        
+        </div>
+        <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="show-cart table">
+              
+            </table>
+            <div class="total-price">Total price: $<span class="total-cart"></span></div>
+          </div>
+
+          
+          
+      </div>
+    </div> 
+    
+    
+        </table>
+        <button type="button" class="btn add-cart btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button><button class="clear-cart btn btn-primary">Clear Cart</button></div>
+        
+      
+            <!-- //jquerry panii use vayako xa -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="script.js"></script>
+        
+    </body>
+    </html>

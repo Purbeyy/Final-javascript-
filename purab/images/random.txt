@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Quiz</title>
+</head>
+<body>
+<div class="quiz">
+    <div id="quizWrap">
+</div>
+
+ <script src="script.js"></script>
+ </body>
+
+
+//js
+var quiz = {
+   
+    data: [
+    {
+      q : "Who is the prime minister of Nepal ?",
+      o : [
+        "Donald Trumph",
+        "Balen Shah",
+        "Sher Bahadur Deuba",
+        "Prem Ale"
+      ],
+      a:2
+    },
+    {
+      q : "What is the capital city of Maldives?",
+      o : [
+        "Colombo",
+        "KAbul",
+        "Hanoi",
+        "Male"
+      ],
+      a:3
+    },
+    {
+      q : "What are the five colors of the Olympic rings?",
+      o : [
+        "Blue, Yellow, Black, Green, and Red",
+        "Brown, Black, Violet, Red, and Green",
+        "Blue, Orange, Red, Black, and Green",
+        "Maroon, Orange, Black, Green and Black"
+      ],
+      a:1
+    },
+    {
+      q: "How many notes are there in a musical scale",
+      o: [
+        "6",
+        "7",
+        "8",
+        "5"
+      ],
+      a:1
+   
+    },
+
+    {
+      q:"Which planet has the most moons?",
+         o:[
+             "Mars",
+             "Earth",
+             "Jupiter",
+             "Saturn"
+         ],
+         a:2
+    },
+
+    {
+      q:"Where did the game of Chess originated?",
+      o:[
+          "India",
+          "Persia",
+          "China",
+          "Egypt"
+      ],
+      a:0
+    },
+    {
+      q: "What is the first video game with more than 100 million copies?",
+         o:[
+             "GTA vice-city",
+             "Super Mario Bros",
+             "Tetris",
+             "Tekken"
+            
+         ],
+         a:1
+    },
+    {
+      q: "Who did Jai Nepal use for the first time?",
+      o:[
+          "Tribhuvan",
+          "Shukraraj Shastri",
+          "Kp oli",
+          "Junga Bahadur Rana"
+      ],
+      a:1
+    },
+    ],
+  
+   
+  
+    
+    now: 0, 
+    score: 0, 
+  
+    
+    init: () => {
+      
+      quiz.hWrap = document.getElementById("quizWrap");
+  
+      // q
+      quiz.hQn = document.createElement("div");
+      quiz.hQn.id = "quizQn";
+      quiz.hWrap.appendChild(quiz.hQn);
+  
+      // a
+      quiz.hAns = document.createElement("div");
+      quiz.hAns.id = "quizAns";
+      quiz.hWrap.appendChild(quiz.hAns);
+  
+      //start
+      quiz.draw();
+    },
+  
+    
+    draw: () => {
+      //q
+      quiz.hQn.innerHTML = quiz.data[quiz.now].q;
+  
+      //o
+      quiz.hAns.innerHTML = "";
+      for (let i in quiz.data[quiz.now].o) {
+        let radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "quiz";
+        radio.id = "quizo" + i;
+        quiz.hAns.appendChild(radio);
+        let label = document.createElement("label");
+        label.innerHTML = quiz.data[quiz.now].o[i];
+        label.setAttribute("for", "quizo" + i);
+        label.dataset.idx = i;
+        label.addEventListener("click", () => { quiz.select(label); });
+        quiz.hAns.appendChild(label);
+      }
+    },
+  
+
+    select: (option) => {
+     
+      let all = quiz.hAns.getElementsByTagName("label");
+      for (let label of all) {
+        label.removeEventListener("click", quiz.select);
+      }
+  
+    
+      let correct = option.dataset.idx == quiz.data[quiz.now].a;
+      if (correct) {
+        quiz.score++;
+        option.classList.add("correct");
+      } else {
+        option.classList.add("wrong");
+      }
+  
+     
+      quiz.now++;
+      setTimeout(() => {
+        if (quiz.now < quiz.data.length) { quiz.draw(); }
+        else {
+          quiz.hQn.innerHTML = "You have answered ${quiz.score} of ${quiz.data.length} correctly.";
+          quiz.hAns.innerHTML = "";
+        }
+      }, 1000);
+    },
+  
+   
+    reset : () => {
+      quiz.now = 0;
+      quiz.score = 0;
+      quiz.draw();
+    }
+  };
+  document.addEventListener("load", loadfunc() );
+  
+  
+  function loadfunc(){
+    setTimeout(quiz.init,2000)
+  }
+ 
+//css
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+  }
+body{
+  background:skyblue;
+}
+
+ .start_btn{ position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+              0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.start_btn button{
+  font-size: 25px;
+  font-weight: 500;
+  color: #007bff;
+  padding: 15px 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+.quiz_box{
+  width: 550px;
+  background: #fff;
+  border-radius: 5px;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+  .quiz{
+      margin: 150px 0 0 500px;
+      max-width: 600px;
+      
+    }
+    
+    /* (B) QUESTION */
+    #quizQn {
+      padding: 20px;
+      background: #000000;
+      color: #fff;
+      font-size: 24px;
+      border-radius: 10px;
+    }
+    
+    /* (C) ANSWERS */
+    #quizAns {
+      margin: 10px 0;
+      display: grid;
+      grid-template-columns:  auto;
+      grid-gap: 10px;
+    }
+    #quizAns input[type=radio] { 
+      display: none; 
+    }
+    #quizAns label {
+      background: #ff8c00;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: center;
+    }
+    #quizAns label.correct {
+      background: #d8ffc4;
+      border: 1px solid #60a03f;
+    }
+    #quizAns label.wrong {
+      background: #ffe8e8;
+      border: 1px solid #c78181;
+    }
+    
+  
+  .nav-bar{
+      background-color: black;
+      display: flex;
+      width: 100%;
+  }
+  
+  .nav-links{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+  }
+  .nav-links a{
+      text-decoration: none;
+      color: white;
+   }
+   
+   .nav-links li{
+       list-style-type: none;
+   }
